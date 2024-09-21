@@ -1,19 +1,13 @@
-// database.js
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.DATABASE_URL,
-                                process.env.DB_SCHEMA || 'postgres',
-                                process.env.DB_USER || 'postgres',
-                                process.env.DB_PASSWORD || 'postgres',
-                                {
-                                    host: process.env.DB_HOST || 'localhost',
-                                    port: process.env.DB_PORT || 5432,
-                                    dialect: 'postgres',
-                                    dialectOptions: {
-                                        ssl: process.env.DB_SSL == "true"
-                                    }
-                                });
-                                
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres', // Esto se debe especificar aquí
+    dialectOptions: {
+        ssl: process.env.DB_SSL === 'true' ? { require: true, rejectUnauthorized: false } : false,
+    },
+});
+
 const Person = sequelize.define('Person', {
     firstName: {
         type: Sequelize.STRING,
@@ -26,6 +20,7 @@ const Person = sequelize.define('Person', {
 }, {
     freezeTableName: true, // Evita la pluralización automática
 });
+
 module.exports = {
     sequelize: sequelize,
     Person: Person
