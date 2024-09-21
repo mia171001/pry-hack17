@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 .env
 
-!SV76686442/src/bin/
+!src/bin/
