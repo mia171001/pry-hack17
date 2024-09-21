@@ -32,11 +32,11 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
-db.sequelize.sync({ force: false }).then(function () {
-  server.on("error", onError);
-  server.on("listening", onListening);
-  console.log("Database created successfully.");
-  });
+// db.sequelize.sync().then(function () {
+//   server.on("error", onError);
+//   server.on("listening", onListening);
+//   console.log("Database created successfully.");
+//   });
 
 
 function normalizePort(val) {
