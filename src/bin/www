@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+const db = require('../database');
 var app = require('../app');
 var debug = require('debug')('addressbook:server');
 var http = require('http');
@@ -32,6 +32,12 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
+db.sequelize.sync({ force: false }).then(function () {
+  server.on("error", onError);
+  server.on("listening", onListening);
+  console.log("Database created successfully.");
+  });
+
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
