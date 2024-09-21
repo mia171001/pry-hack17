@@ -22,6 +22,8 @@ const Person = sequelize.define('Person', {
         type: Sequelize.STRING,
         allowNull: true
     },
+}, {
+    freezeTableName: true, // Evita la pluralización automática
 });
 module.exports = {
     sequelize: sequelize,
